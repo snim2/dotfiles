@@ -59,6 +59,7 @@ rg() {
 # which hack, so it also shows defined aliases and functions that match
 # From pmarreck @ github
 which() {
+  # shellcheck disable=SC2230
   which_out=$(/usr/bin/which "$@");
   if [ -n "$which_out" ]; then
     echo "$which_out";
