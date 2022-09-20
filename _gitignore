@@ -3,6 +3,9 @@ test_local.sh
 test-local.sh
 API_KEY
 
+# VSCode
+.vscode/*
+
 #
 # Standard MacOS .gitignore.
 #
