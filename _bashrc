@@ -5,6 +5,12 @@ set -e
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+UNAME_OS=$(uname -s)
+if [[ "${UNAME_OS}" == "Darwin" ]]; then
+    # shellcheck source=/dev/null
+    source "$HOME/.iterm2_shell_integration.bash"
+fi
+
 export ANDROID_HOME=${HOME}/Android/Sdk/
 export ANDROID_SDK_ROOT=${HOME}/Android/Sdk/
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
@@ -250,9 +256,15 @@ fi
 # Terminal tab name in gnome-terminal, Guake, etc.
 PROMPT_COMMAND=' echo -ne "\033]0;$(basename "${PWD}")\007"'
 # Installed with the Git package, provides __git_ps1 function.
-# shellcheck source=/dev/null
-source /usr/lib/git-core/git-sh-prompt
-# Note the use of quotes here: "" expand at setting time, '' expand at runtime.
+UNAME_OS=$(uname -s)
+if [[ "${UNAME_OS}" == "Darwin" ]]; then
+    # shellcheck source=/dev/null
+    source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
+else
+    # shellcheck source=/dev/null
+    source /usr/lib/git-core/git-sh-prompt
+fi
+
 PS1=
 PS1+='$('
     PS1+='ret=$?; '  # Save the return code of the last command to be executed.
