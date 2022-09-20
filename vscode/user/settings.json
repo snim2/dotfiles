@@ -1,0 +1,24 @@
+{
+    "workbench.colorTheme": "Monokai",
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.renderWhitespace": "all",
+    "git.branchProtection": [
+        "develop,dev,main"
+    ],
+    "security.workspace.trust.untrustedFiles": "open",
+    "files.autoSave": "afterDelay",
+    "github.gitProtocol": "ssh",
+    "terminal.integrated.minimumContrastRatio": 1,
+    "terminal.integrated.gpuAcceleration": "canvas",
+    "terminal.integrated.fontFamily": "Menlo, monospace, PowerlineSymbols",
+    "terminal.integrated.customGlyphs": true,
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "editor.fontWeight": "normal",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "diffEditor.codeLens": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.folding": false,
+    "editor.rulers": [ 80, 120 ]
+}
