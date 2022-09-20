@@ -1,0 +1,2 @@
+# The visual bell in the shell should not beep at me.
+set bell-style none

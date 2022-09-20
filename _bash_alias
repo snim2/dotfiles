@@ -1,0 +1,15 @@
+# alias emacs='emacs -nw'
+
+alias less='less -RN'
+
+# Run a junit4 test on a given object or package.
+alias junit4='java -cp $CLASSPATH:/usr/share/java/junit4.jar:/usr/lib/jvm/java-7-oracle/lib/tjar org.junit.runner.JUnitCore'
+
+# Some ls aliases.
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

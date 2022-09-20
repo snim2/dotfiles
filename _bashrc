@@ -1,0 +1,287 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+set -e
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+export ANDROID_HOME=${HOME}/Android/Sdk/
+export ANDROID_SDK_ROOT=${HOME}/Android/Sdk/
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+
+# Needed by gnome-screenshot keyboard shortcut.
+export PICTURES=${HOME}
+
+export PATH=$PATH:${HOME}/.cabal/bin/:${HOME}/.local/bin/:${HOME}/.cargo/bin:/rust/bin/
+
+export LD_LIBRARY_PATH=/rust/lib/:$LD_LIBRARY_PATH
+
+# PHPBrew
+# shellcheck source=/dev/null
+[[ -e ~/.phpbrew/bashrc ]] && source "${HOME}/.phpbrew/bashrc"
+
+# Parallella toolchain
+# export EPIPHANY_HOME=/opt/adapteva/esdk
+# export PATH=${EPIPHANY_HOME}/tools/e-gnu/bin:${EPIPHANY_HOME}/tools/host/bin:${PATH}
+# export LD_LIBRARY_PATH=${EPIPHANY_HOME}/tools/host/lib:${LD_LIBRARY_PATH}
+# export EPIPHANY_HDF=${EPIPHANY_HOME}/bsps/current/platform.hdf
+# export MANPATH=${EPIPHANY_HOME}/tools/e-gnu/share/man:${MANPATH}
+#ESDK=${HOME}/buildroot/esdk.2015.1
+#HOSTNAME      = host.x86_64
+#GNUNAME       = e-gnu.x86_64
+#GNU=${HOME}/buildroot/esdk.2015.1/tools/host.x86_64
+
+# Fix two-finger scrolling on laptop.
+if [ "$(hostname)" = "snim2-travel" ] ; then
+    synclient VertTwoFingerScroll=1
+    synclient HorizTwoFingerScroll=1
+    synclient EmulateTwoFingerMinW=5
+    synclient EmulateTwoFingerMinZ=48
+fi
+
+# Default text editor
+export EDITOR='subl'
+
+# Make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+
+# -----------------------------------------------------------------------------
+# FUNCTIONS
+# -----------------------------------------------------------------------------
+
+rg() {
+    "${HOME}/.cargo/bin/rg" -p --color=always "$@" | less -R
+}
+
+# which hack, so it also shows defined aliases and functions that match
+# From pmarreck @ github
+which() {
+  which_out=$(/usr/bin/which "$@");
+  if [ -n "$which_out" ]; then
+    echo "$which_out";
+  else
+    type "$@";
+  fi
+}
+
+# Who is holding open this port or file??
+# From pmarreck @ github
+function whoport {
+    lsof -P -i ":${1}"
+}
+function whofile {
+    lsof "${1}"
+}
+
+# Extract any sort of archive.
+# By Emmanuel Rouat from http://tldp.org/LDP/abs/html/sample-bashrc.html
+function extract() {
+    if [ -f "$1" ] ; then
+        case "$1" in
+            *.tar.bz2)   tar xvjf "$1"     ;;
+            *.tar.gz)    tar xvzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"      ;;
+            *.rar)       unrar x "$1"      ;;
+            *.gz)        gunzip "$1"       ;;
+            *.tar)       tar xvf "$1"      ;;
+            *.tbz2)      tar xvjf "$1"     ;;
+            *.tgz)       tar xvzf "$1"     ;;
+            *.zip)       unzip "$1"        ;;
+            *.Z)         uncompress "$1"   ;;
+            *.7z)        7z x "$1"         ;;
+            *.jar)       jar xvf           ;;
+            *)           echo "'$1' cannot be extracted via >extract<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+}
+
+
+# -----------------------------------------------------------------------------
+# ALIAS
+# -----------------------------------------------------------------------------
+
+if [ -f ~/.bash_aliases ]; then
+    # shellcheck source=/dev/null
+    source ~/.bash_aliases
+fi
+
+
+# -----------------------------------------------------------------------------
+# COMPLETION
+# -----------------------------------------------------------------------------
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    # shellcheck source=/dev/null
+    source /etc/bash_completion
+fi
+
+
+# -----------------------------------------------------------------------------
+# MAN
+# -----------------------------------------------------------------------------
+
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+
+# -----------------------------------------------------------------------------
+# OPTIONS
+# -----------------------------------------------------------------------------
+
+# Stop checking for mail at the terminal
+shopt -u mailwarn
+unset MAILCHECK
+
+# Automatically correct spelling mistakes in the shell
+#shopt -s cdspell
+
+# Automaticly cd into directory
+#shopt -s autocd
+
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+shopt -s cdable_vars
+shopt -s checkhash
+shopt -s sourcepath
+shopt -s no_empty_cmd_completion
+shopt -s cmdhist
+shopt -s histappend histreedit histverify
+
+shopt -s extglob  # Necessary for programmable completion.
+
+# -----------------------------------------------------------------------------
+# HISTORY
+# -----------------------------------------------------------------------------
+
+# Don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+
+# -----------------------------------------------------------------------------
+# COLORS
+# -----------------------------------------------------------------------------
+
+# Set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# Uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+# Enable color support of ls and also add handy aliases.
+if [ -x /usr/bin/dircolors ]; then
+    # shellcheck disable=SC2015
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+
+# -----------------------------------------------------------------------------
+# PROMPT
+# -----------------------------------------------------------------------------
+
+# tput colour table:
+#     https://linux.101hacks.com/ps1-examples/prompt-color-using-tput/
+# shellcheck disable=SC2034
+if [ "$color_prompt" = yes ]; then
+    color_reset=\\[$(tput sgr0)\\]
+    color_bold=\\[$(tput bold)\\]
+    color_jobs=\\[$(tput setaf 7)\\]
+    color_user=\\[$(tput setaf 3)\\]
+    color_dir=\\[$(tput setaf 4)\\]
+    color_load=\\[$(tput setaf 5)\\]
+    color_tstamp=\\[$(tput setaf 6)\\]
+    color_succeed=\\[$(tput setaf 2)\\]
+    color_fail=\\[$(tput setaf 1)\\]
+    sep=\\[$(tput setaf 7)\\]\|
+else
+    color_reset=
+    color_bold=
+    color_white=
+    color_jobs=
+    color_user=
+    color_dir=
+    color_load=
+    color_succeed=
+    color_fail=
+    sep=\|
+fi
+
+# Terminal tab name in gnome-terminal, Guake, etc.
+PROMPT_COMMAND=' echo -ne "\033]0;$(basename "${PWD}")\007"'
+# Installed with the Git package, provides __git_ps1 function.
+# shellcheck source=/dev/null
+source /usr/lib/git-core/git-sh-prompt
+# Note the use of quotes here: "" expand at setting time, '' expand at runtime.
+PS1=
+PS1+='$('
+    PS1+='ret=$?; '  # Save the return code of the last command to be executed.
+    PS1+='__git_ps1; '
+    PS1+='printf "\\ue0a0 %s""'  # Print git branch name.
+    PS1+="${color_user}\u${sep}"  # Username.
+    PS1+="${color_tstamp}\D{%T}${sep}"  # Timestamp.
+    PS1+="${color_dir}\W${sep}"  # Current working directory (basename only).
+    PS1+='"; '
+    # Return code of the last command that was executed.
+    PS1+='if ((ret == 0)); then '
+        PS1+='printf "%s" "'
+        PS1+="${color_bold}${color_succeed}"
+        PS1+='\342\234\224";'
+    PS1+='else '
+        PS1+='printf "%s" "'
+        PS1+="${color_bold}${color_fail}"
+        # shellcheck disable=SC2154
+        PS1+='$ret"; '
+    PS1+='fi '
+PS1+=')'
+PS1+="${color_reset}${sep}"
+PS1+='\$ '  # Prompt.
+
+# -----------------------------------------------------------------------------
+# MOTD
+# -----------------------------------------------------------------------------
+
+tput setaf 2
+echo -ne "$(date)"
+tput setaf 4
+uptime
+tput sgr0
