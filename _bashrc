@@ -294,7 +294,7 @@ PS1+='\$ '  # Prompt.
 # -----------------------------------------------------------------------------
 
 tput setaf 2
-echo -ne "$(date)"
+echo -ne "$(date) "
 tput setaf 4
 uptime
 tput sgr0
