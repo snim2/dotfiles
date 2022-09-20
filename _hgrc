@@ -1,0 +1,37 @@
+[ui]
+editor = /usr/bin/emacs -nw --no-desktop
+username = snim2
+merge = meld $base $local $other
+usehttp2 = true
+
+[extensions]
+hgext.graphlog =
+hgext.color =
+hgext.churn =
+hgext.hgk =
+hgext.highlight =
+hgext.activity = ~/.hg/activity.py
+hgext.convert =
+
+[color]
+mode = terminfo
+
+[merge-tools]
+meld.executable = meld
+meld.gui = True
+meld.args = $base $local $other -o $output
+meld.priority = 0
+
+[tortoisehg]
+summarylen = 70
+messagewrap = 80
+pushafterci = False
+vdiff = meld $base $local $other
+editor = /usr/bin/emacs
+fullpath = True
+spellcheck = en_GB
+authorcolor = True
+longsummary = True
+changeset-expander = True
+
+[http_proxy]
