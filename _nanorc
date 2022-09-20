@@ -1,0 +1,9 @@
+set autoindent
+set constantshow
+set indicator
+set linenumbers
+set mouse
+set positionlog
+set tabsize 4
+
+include "~/.nano/*.nanorc"

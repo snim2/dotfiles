@@ -6,6 +6,11 @@ set -e
 # Script to set up symlinks to these dotfiles in $HOME.
 #
 
+# Install nano syntax highlighting files.
+if [[ ! -d "$HOME/.nano" ]]; then
+    git clone git@github.com:serialhex/nano-highlight.git "$HOME/.nano"
+fi
+
 TOP_LEVEL_DIR=$(git rev-parse --show-toplevel)
 for DOTFILE in _*
 do
