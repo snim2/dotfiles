@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+shellcheck script/*
+shellcheck --shell=bash _bash* _zsh*
+
+echo "Shellcheck: OK."
