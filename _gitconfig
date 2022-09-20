@@ -1,0 +1,194 @@
+[core]
+    editor = nano
+    ignorecase = false
+    excludesfile = ~/.gitignore
+
+# Anything local to this machine is kept in a separate file.
+# This includes, credentials, authentication, signing, external tools.
+[include]
+    path = .gitconfig_local
+
+[init]
+    defaultBranch = main
+
+[help]
+    autocorrect = 1
+
+[status]
+    submodulesummary = true
+
+[fetch]
+    prune = true
+
+[grep]
+    lineNumber = true
+
+[push]
+    default = simple
+    rebase = true
+
+# [pull]
+#    rebase = merges
+
+[rebase]
+    autosquash = true
+
+[pager]
+    show-branch = true
+    status = true
+
+[rerere]
+    enabled = true
+
+[filter "lfs"]
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+
+# [merge]
+#     tool = meld
+#     conflictstyle = diff3
+
+# [diff]
+#     tool = meld
+#     colorMoved = zebra
+# #    noprefix = true
+
+[difftool]
+    prompt = false
+
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+
+[merge]
+    tool = meld
+    conflictstyle = diff3
+
+#
+# Colours
+#
+
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+#
+# Aliases.
+#
+
+[alias]
+    # Be nice.
+    praise = blame
+
+    # Show all aliases with 'git alias'.
+    alias = config --get-regexp ^alias\\.
+
+    # Simple, readable log.
+    tree-log = log --color --graph --oneline --decorate
+
+    # How many commits are in this branch, but not in develop?
+    howmany-develop = rev-list --count develop..
+
+    # How many commits are in this branch, but not in master?
+    howmany-master = rev-list --count master..
+
+    # How many commits are in this branch, but not in main?
+    howmany-main = rev-list --count main..
+
+    # List tasks
+    tasks = grep -EI "TODO|FIXME|WRITEME"
+
+    # Edit the last commit message.
+    amend = commit --amend -C HEAD
+
+    # Unstage a staged commit.
+    unstage = !git reset HEAD
+
+    # Show the changes that are currently unstaged.
+    dc = diff --cached
+
+    # Show the changes that are currently staged.
+    ds = diff --staged
+
+    # Show a list of branches and their commits.
+    sb = show-branch
+
+    # Find text in any commit in the repo history.
+    grep-all = !"git rev-list --all | xargs git grep '$1'"
+
+    # Show who contributed which changes.
+    who = shortlog -s --
+
+    # Lookup full name and email for any author.
+    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+
+    # Show who contributed, in descending order by number of commits.
+    whorank = shortlog -sn --no-merges
+
+    # Stash aliases
+    save = !git stash save
+    pop = !git stash pop
+
+    # Checkout
+    co = checkout
+
+# Workflow aliases - mainly from here:
+#     http://haacked.com/archive/2014/07/28/github-flow-aliases/
+[alias]
+    # Get current branch up to date with remote
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+
+    # chery-pick
+    cp = cherry-pick
+
+    # Checkout new feature branch
+    cob = checkout -b
+
+    # Commit all files
+    cm = !git add -A && git commit -m
+
+    # Save current work (with intention to undo or rebase)
+    save = !git add -A && git commit -m 'SAVEPOINT'
+    wip = !git add -u && git commit -m "WIP"
+
+    # Undo last commit
+    undo = reset HEAD~1 --mixed
+
+    # Rewrite last commit message
+    amend = commit -a --amend
+
+    # Delete all branches already merged into main
+    bclean-main = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
+
+    # Switch to main; run 'git up' to sync with remote; delete all branches already merged to main (with git bclean)
+    bdone-main = "!f() { git checkout ${1-main} && git up && git bclean-main ${1-main}; }; f"
+
+    # Delete all branches already merged into master
+    bclean-master = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+
+    # Switch to master; run 'git up' to sync with remote; delete all branches already merged to master (with git bclean)
+    bdone-master = "!f() { git checkout ${1-master} && git up && git bclean-master ${1-master}; }; f"
+
+    # Delete all branches already merged into develop
+    bclean-develop = "!f() { git branch --merged ${1-develop} | grep -v " ${1-develop}$" | xargs -r git branch -d; }; f"
+
+    # Switch to develop; run 'git up' to sync with remote; delete all branches already merged to develop (with git bclean)
+    bdone-develop = "!f() { git checkout ${1-develop} && git up && git bclean-develop ${1-develop}; }; f"
