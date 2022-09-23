@@ -15,10 +15,17 @@
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.defaultProfile.osx": "zsh",
     "editor.fontWeight": "normal",
+    "editor.fontLigatures": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "diffEditor.codeLens": true,
     "files.trimTrailingWhitespace": true,
     "editor.folding": false,
-    "editor.rulers": [ 80, 120 ]
+    "editor.rulers": [ 80, 120 ],
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--rcfile=${env:HOME}/.pylintrc"
+    ],
+    "cSpell.language": "en-GB"
 }
