@@ -21,3 +21,9 @@ To update the list of extensions, run:
 ```script
 ./script/dump-vs-code-extensions.sh
 ```
+
+## Installing MacOS keybindings
+
+```shell
+./script/install-mac-keybindings.sh
+```
