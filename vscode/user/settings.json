@@ -1,5 +1,10 @@
 {
     "workbench.colorTheme": "Monokai",
+    "workbench.colorCustomizations": {
+        "[Monokai]": {
+            "editorWhitespace.foreground": "#999"
+        }
+    },
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.renderWhitespace": "all",
     "git.branchProtection": [
