@@ -1,5 +1,8 @@
 # dotfiles
 
+![Main workflow](https://github.com/snim2/dotfiles/actions/workflows/main.yml/badge.svg)
+
+
 My configuration files. Probably not useful for anyone else!
 
 ## Install dotfiles
