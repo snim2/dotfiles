@@ -4,5 +4,5 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-git ls-files -z -c '*.bash' '*.sh' '_bash*' '_zsh*' 'script/*' | xargs -0 shellcheck --shell=bash -x
+git ls-files -z -c '*.bash' '*.sh' '_bash*' '_zsh*' 'script/*' 'bin/*' | xargs -0 shellcheck --shell=bash -x
 echo "Shellcheck: OK."

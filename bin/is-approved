@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Note: avoid temporary files with: diff <(wget -O - url1) <(wget -O - url2)
+
+set -o errexit
+set -o pipefail
+
+# In some versions of Bash, `set -u` or `set -o nounset` will raise an error
+# if `$@` is used and no arguments are passed to the script.
+# See bash-4.1-alpha patches, 1.n:
+#     https://tiswww.case.edu/php/chet/bash/CHANGES
+if [[ -z "${*}" ]]; then
+    ARGS=( "" )
+else
+    ARGS=( "${@}" )
+fi
+set -o nounset
+
+APPROVED_SOFTWARE_REPO="${HOME}/code/github.com/dxw/dxw-approved-software"
+
+GREP_FLAGS="-i"
+
+main() {
+    RETCODE=0
+    cd "${APPROVED_SOFTWARE_REPO}"
+    for APP in "${@}"; do
+        if GREP_OUT=$(git grep "${GREP_FLAGS}" "${APP}"); then
+            if grep -q "homebrew.txt" <<< "${GREP_OUT}"; then
+                echo "${APP} is approved for Homebrew."
+            fi
+            if grep -q "applications.txt" <<< "${GREP_OUT}"; then
+                echo "${APP} is approved as an application."
+            fi
+        else
+            echo "${APP} is not approved."
+            RETCODE=$((1 || RETCODE))
+        fi
+    done
+    exit $RETCODE
+}
+
+main "${ARGS[@]}"

@@ -1,6 +1,6 @@
 # dotfiles
 
-My configuration files
+My configuration files. Probably not useful for anyone else!
 
 ## Install dotfiles
 
@@ -26,4 +26,10 @@ To update the list of extensions, run:
 
 ```shell
 ./script/install-mac-keybindings.sh
+```
+
+## Installing ~/bin scripts
+
+```shell
+./script/install-bin.sh
 ```
