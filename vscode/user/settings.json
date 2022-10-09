@@ -33,5 +33,6 @@
         "--rcfile=${env:HOME}/.pylintrc"
     ],
     "cSpell.language": "en-GB",
-    "redhat.telemetry.enabled": false
+    "redhat.telemetry.enabled": false,
+    "editor.fontFamily": "'FiraCode Nerd Font Retina', Menlo, Monaco, 'Courier New', monospace"
 }
