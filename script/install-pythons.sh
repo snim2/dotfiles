@@ -18,6 +18,9 @@ set -e
 
 for PYTHONVERSION in $(cat "$HOME"/code/*/*/*/.python-version | sort | uniq)
 do
-    echo "Installing ${PYTHONVERSION} ..."
-    pyenv install "${PYTHONVERSION}"
+    if [[ -n ${PYTHONVERSION} ]]
+    then
+        echo "Installing ${PYTHONVERSION} ..."
+        pyenv install "${PYTHONVERSION}"
+    fi
 done
