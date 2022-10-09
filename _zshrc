@@ -190,7 +190,8 @@ precmd() {
 
 # From Lee: by default on MacOS history only retrieves the last
 # 16 entries. This makes the behaviour more like the Bash default.
-alias history="history 1"
+# -E is the equivalent of HISTTIMEFORMAT in Bash.
+alias history="history -E 1"
 
 # Who is holding open this port or file??
 # From pmarreck @ github
