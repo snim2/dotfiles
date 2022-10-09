@@ -32,5 +32,6 @@
     "python.linting.pylintArgs": [
         "--rcfile=${env:HOME}/.pylintrc"
     ],
-    "cSpell.language": "en-GB"
+    "cSpell.language": "en-GB",
+    "redhat.telemetry.enabled": false
 }
