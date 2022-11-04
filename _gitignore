@@ -5,6 +5,7 @@ API_KEY
 
 # VSCode
 .vscode/*
+*.code-workspace
 
 #
 # Standard MacOS .gitignore.
