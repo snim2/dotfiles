@@ -221,3 +221,7 @@ source "$(brew --prefix)/etc/bash_completion.d/adr-tools"
 # Traditionally, $VISUAL is intended to be a fully-featured editor, and $EDITOR
 # is set to a line editor (e.g. ed), but modern tools often ignore $VISUAL.
 export VISUAL=nano
+
+# php-version configuration: https://github.com/wilmoore/php-version
+# shellcheck source=/dev/null
+source "$(brew --prefix php-version)/php-version.sh" && php-version 8.1
