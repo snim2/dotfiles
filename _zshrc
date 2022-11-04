@@ -210,3 +210,14 @@ chpwd() {
 # Load pyenv-virtualenv automatically.
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# Use the provided Bash autocompletion for adr-tools. Note that there are other
+# scripts in this directory, but not all of them work well with zsh.
+autoload -U +X bashcompinit && bashcompinit
+# shellcheck source=/dev/null
+source "$(brew --prefix)/etc/bash_completion.d/adr-tools"
+
+# Some tools (e.g. Git, adr-tools) use $VISUAL and $EDITOR as a fallback.
+# Traditionally, $VISUAL is intended to be a fully-featured editor, and $EDITOR
+# is set to a line editor (e.g. ed), but modern tools often ignore $VISUAL.
+export VISUAL=nano
