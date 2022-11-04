@@ -28,6 +28,18 @@ export LD_LIBRARY_PATH=/rust/lib/:$LD_LIBRARY_PATH
 # shellcheck source=/dev/null
 [[ -e ~/.phpbrew/bashrc ]] && source "${HOME}/.phpbrew/bashrc"
 
+# Auto completion for pip. Generated with `pip completion --bash`.
+# pip bash completion start
+# shellcheck disable=SC2207
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 2>/dev/null ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
+
 # Parallella toolchain
 # export EPIPHANY_HOME=/opt/adapteva/esdk
 # export PATH=${EPIPHANY_HOME}/tools/e-gnu/bin:${EPIPHANY_HOME}/tools/host/bin:${PATH}
