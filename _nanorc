@@ -5,4 +5,13 @@ set linenumbers
 set mouse
 set tabsize 4
 
+# Wrap at column number...
+set fill "79"
+# Set the characters treated as closing brackets when justifying paragraphs.
+set brackets string ""')>]}"
+# Set the opening and closing brackets that can be found by bracket searches.
+set matchbrackets string "(<[{)>]}"
+# Set the characters treated as closing punctuation when justifying paragraphs.
+set punct "!.?"
+
 include "~/.nano/*.nanorc"
