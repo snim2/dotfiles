@@ -204,7 +204,7 @@ function whofile {
 
 # List directory contents after each cd.
 chpwd() {
-   [[ $- == *i* ]] && ls -thG
+    [[ $- == *i* ]] && ls -thG
 }
 
 # Load pyenv-virtualenv automatically.
