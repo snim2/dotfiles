@@ -178,20 +178,11 @@
     # Rewrite last commit message
     amend = commit -a --amend
 
-    # Delete all branches already merged into main
-    bclean-main = "!f() { git branch --merged ${1-main} | grep -v " ${1-main}$" | xargs -r git branch -d; }; f"
+    # Get default branch.
+    default-branch = !git remote show origin | awk '/HEAD branch/ {print $NF}'
 
-    # Switch to main; run 'git up' to sync with remote; delete all branches already merged to main (with git bclean)
-    bdone-main = "!f() { git checkout ${1-main} && git up && git bclean-main ${1-main}; }; f"
+    # Delete all branches already merged into default branch
+    bclean = "!f() { git branch --merged ${1-$(git default-branch)} | grep -v " ${1-$(git default-branch)}$" | xargs -r git branch -d; }; f"
 
-    # Delete all branches already merged into master
-    bclean-master = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
-
-    # Switch to master; run 'git up' to sync with remote; delete all branches already merged to master (with git bclean)
-    bdone-master = "!f() { git checkout ${1-master} && git up && git bclean-master ${1-master}; }; f"
-
-    # Delete all branches already merged into develop
-    bclean-develop = "!f() { git branch --merged ${1-develop} | grep -v " ${1-develop}$" | xargs -r git branch -d; }; f"
-
-    # Switch to develop; run 'git up' to sync with remote; delete all branches already merged to develop (with git bclean)
-    bdone-develop = "!f() { git checkout ${1-develop} && git up && git bclean-develop ${1-develop}; }; f"
+    # Switch to default branch; run 'git up' to sync with remote; delete all branches already merged to default branch (with git bclean)
+    bdone = "!f() { git checkout ${1-$(git default-branch)} && git up && git bclean ${1-$(git default-branch)}; }; f"
