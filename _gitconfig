@@ -181,6 +181,9 @@
     # Get default branch.
     default-branch = !git remote show origin | awk '/HEAD branch/ {print $NF}'
 
+    # How many commits are in this branch, but not in the default branch?
+    howmany = !git rev-list --count $(git default-branch)..
+
     # Delete all branches already merged into default branch
     bclean = "!f() { git branch --merged ${1-$(git default-branch)} | grep -v " ${1-$(git default-branch)}$" | xargs -r git branch -d; }; f"
 
