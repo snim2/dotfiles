@@ -220,7 +220,7 @@ export VISUAL=nano
 
 # php-version configuration: https://github.com/wilmoore/php-version
 # shellcheck source=/dev/null
-source "$(brew --prefix php-version)/php-version.sh" && php-version 8.1
+source "$(brew --prefix php-version)/php-version.sh" && php-version 7.4
 
 # Add my scripts to the path: these are kept in my dotfiles repo.
 # Add govpress-tools scripts to path.
