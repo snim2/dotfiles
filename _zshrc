@@ -224,7 +224,8 @@ source "$(brew --prefix php-version)/php-version.sh" && php-version 7.4
 
 # Add my scripts to the path: these are kept in my dotfiles repo.
 # Add govpress-tools scripts to path.
-export PATH=$HOME/bin:/Users/snim2/code/github.com/dxw/govpress-tools/bin:$PATH
+# Add dalmatian-tools scripts to path.
+export PATH=$HOME/bin:/Users/snim2/code/github.com/dxw/govpress-tools/bin:/Users/snim2/code/github.com/dxw/dalmatian-tools/bin:$PATH
 
 # Autocompletions for govpress-tools
 # shellcheck source=/dev/null
