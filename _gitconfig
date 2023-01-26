@@ -18,7 +18,7 @@
     submodulesummary = true
 
 [commit]
-    verbose = true
+    verbose = false
 
 [fetch]
     prune = true
