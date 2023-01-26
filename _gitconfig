@@ -2,6 +2,7 @@
     editor = nano
     ignorecase = false
     excludesfile = ~/.gitignore
+    hooksPath = ~/code/github.com/erbridge/git-pair/githooks
 
 # Anything local to this machine is kept in a separate file.
 # This includes, credentials, authentication, signing, external tools.
@@ -189,3 +190,8 @@
 
     # Switch to default branch; run 'git up' to sync with remote; delete all branches already merged to default branch (with git bclean)
     bdone = "!f() { git checkout ${1-$(git default-branch)} && git up && git bclean ${1-$(git default-branch)}; }; f"
+
+# Aliases for the git-pair plugin: https://github.com/erbridge/git-pair
+[alias]
+    pair = !~/code/github.com/erbridge/git-pair/bin/git-pair
+    solo = !~/code/github.com/erbridge/git-pair/bin/git-solo
