@@ -1,7 +1,9 @@
 # Files I often create for local testing.
-test_local.sh
 test-local.sh
-API_KEY
+test_local.sh
+run-local.sh
+run_local.sh
+API_KEY*
 
 # VSCode
 .vscode/*
