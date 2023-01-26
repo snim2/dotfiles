@@ -1,3 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~//.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# shellcheck source=/dev/null
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${%:-%n}.zsh" ]]; then
+    # shellcheck source=/dev/null
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${%:-%n}.zsh"
+fi
+
 # shellcheck disable=SC2148
 
 if [[ "$(uname -m)" == "arm64" ]] || [[ "$(sysctl -in sysctl.proc_translated)" == "1" ]]; then
@@ -112,6 +121,10 @@ if ! zgen saved; then
     # Other plugins
     zgen load djui/alias-tips
     zgen load unixorn/autoupdate-zgen
+
+    # powerlevel10k theme
+    # https://github.com/romkatv/powerlevel10k#zgen
+    zgen load romkatv/powerlevel10k powerlevel10k
 
     zgen save
 fi
@@ -234,3 +247,7 @@ source "$HOME/.govpress_zsh_completions.sh"
 # Autocompletions for pip
 # shellcheck source=/dev/null
 source "$HOME/.pip_zsh_completions.sh"
+
+# To customize prompt, run `p10k configure` or edit ~//.p10k.zsh.
+# shellcheck source=/dev/null
+[[ ! -f ~//.p10k.zsh ]] || source ~//.p10k.zsh
