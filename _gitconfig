@@ -31,8 +31,8 @@
     default = simple
     rebase = true
 
-# [pull]
-#    rebase = merges
+[pull]
+    rebase = merges
 
 [rebase]
     autosquash = true
