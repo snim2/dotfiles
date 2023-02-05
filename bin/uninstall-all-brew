@@ -1,0 +1,4 @@
+#!/bin/sh
+
+brew remove --force "$(brew list --formula)"
+brew remove --cask --force "$(brew list)"
