@@ -198,9 +198,16 @@ function whofile {
     lsof "${1}"
 }
 
-# List directory contents after each cd.
+# On each invocation of cd, if the CWD is the top-level of a Git repository,
+# list Git branches, otherwise list contents.
 chpwd() {
-    [[ $- == *i* ]] && ls -thG
+    if [[ $- == *i* ]]; then
+        if [[ $(git rev-parse --show-toplevel 2>/dev/null) == "${PWD}" ]]; then
+            git branch
+        else
+            ls -thG
+        fi
+    fi
 }
 
 # Load pyenv-virtualenv automatically.
