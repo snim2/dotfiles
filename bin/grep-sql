@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#
+# Print a list of SQL keywords found in a (possibly binary) file.
+#
+
+KEYWORDS=$(cat "${HOME}/data/sql_keywords")
+FILE_CONTENTS=$(strings "$1")
+
+for word in ${KEYWORDS}
+do
+    if echo "${FILE_CONTENTS}" | grep -q "${word}";
+    then
+        echo "${word}"
+    fi
+done
