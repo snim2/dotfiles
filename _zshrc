@@ -236,11 +236,11 @@ export PATH=$HOME/bin:/Users/snim2/code/github.com/dxw/govpress-tools/bin:/Users
 
 # Autocompletions for govpress-tools
 # shellcheck source=/dev/null
-source "$HOME/.govpress_zsh_completions.sh"
+[[ -f "$HOME/.govpress_zsh_completions.sh" ]] && source "$HOME/.govpress_zsh_completions.sh"
 
 # Autocompletions for pip
 # shellcheck source=/dev/null
-source "$HOME/.pip_zsh_completions.sh"
+[[ -f "$HOME/.pip_zsh_completions.sh" ]] && source "$HOME/.pip_zsh_completions.sh"
 
 
 GPG_TTY="$(tty)"
