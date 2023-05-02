@@ -13,6 +13,6 @@ git ls-files -z -c '*.bash' \
                    '_zshrc/*' \
                    '_zshrc.d/*' \
                    'script/*' \
-                   'bin/*' | xargs -0 shellcheck --shell=bash -x
+                   'bin/*' | xargs -0 shellcheck --shell=bash --color=always --external-sources --check-sourced
 
 echo "Shellcheck: OK."
