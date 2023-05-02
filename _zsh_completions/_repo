@@ -1,0 +1,15 @@
+#compdef repo
+
+# List names of repository clones without preceding paths.
+# Full paths will look like this:
+#     /Users/snim2/code/github.com/snim2/dotfiles
+_get_repos() {
+    find "$HOME/code" -maxdepth 3 -mindepth 3 -type d -exec basename {} \;
+}
+
+_repo() {
+    # shellcheck disable=SC2046
+    compadd $(_get_repos)
+}
+
+compdef _repo repo

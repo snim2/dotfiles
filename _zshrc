@@ -7,6 +7,9 @@ __git_files () {
     _wanted files expl 'local files' _files
 }
 
+# Add my custom autocompletions to the FPATH.
+FPATH=$HOME/.zsh_completions/:$FPATH
+
 if [[ "$(uname -m)" == "arm64" ]] || [[ "$(sysctl -in sysctl.proc_translated)" == "1" ]]; then
     if command -v /usr/local/bin/brew >/dev/null 2>&1; then
         eval "$(/usr/local/bin/brew shellenv)"
