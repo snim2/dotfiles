@@ -174,74 +174,11 @@ bindkey '^[[B' history-substring-search-down
 
 export EDITOR=nano
 
-# END local-env
+# END local-env generated file.
 
-# Set iTerm2 tab title to the current directory. Recipe from:
-#     https://gist.github.com/phette23/5270658?permalink_comment_id=3020766#gistcomment-3020766
-# shellcheck disable=SC2034
-DISABLE_AUTO_TITLE="true"
-precmd() {
-    echo -ne "\e]1;${PWD##*/}\a"
-}
-
-# From Lee: by default on MacOS history only retrieves the last
-# 16 entries. This makes the behaviour more like the Bash default.
-# -E is the equivalent of HISTTIMEFORMAT in Bash.
-alias history="history -E 1"
-
-# Who is holding open this port or file??
-# From pmarreck @ github
-function whoport {
-    lsof -P -i ":${1}"
-}
-function whofile {
-    lsof "${1}"
-}
-
-# On each invocation of cd, if the CWD is the top-level of a Git repository,
-# list Git branches, otherwise list contents.
-chpwd() {
-    if [[ $- == *i* ]]; then
-        if [[ $(git rev-parse --show-toplevel 2>/dev/null) == "${PWD}" ]]; then
-            git branch
-        else
-            ls -thG
-        fi
-    fi
-}
-
-# Load pyenv-virtualenv automatically.
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# Use the provided Bash autocompletion for adr-tools. Note that there are other
-# scripts in this directory, but not all of them work well with zsh.
-autoload -U +X bashcompinit && bashcompinit
+# Split my custom configuration into smaller files.
 # shellcheck source=/dev/null
-source "$(brew --prefix)/etc/bash_completion.d/adr-tools"
-
-# Some tools (e.g. Git, adr-tools) use $VISUAL and $EDITOR as a fallback.
-# Traditionally, $VISUAL is intended to be a fully-featured editor, and $EDITOR
-# is set to a line editor (e.g. ed), but modern tools often ignore $VISUAL.
-export VISUAL=nano
-
-# php-version configuration: https://github.com/wilmoore/php-version
-# shellcheck source=/dev/null
-source "$(brew --prefix php-version)/php-version.sh" && php-version 7.4
-
-# Add my scripts to the path: these are kept in my dotfiles repo.
-# Add govpress-tools scripts to path.
-# Add dalmatian-tools scripts to path.
-export PATH=$HOME/bin:/Users/snim2/code/github.com/dxw/govpress-tools/bin:/Users/snim2/code/github.com/dxw/dalmatian-tools/bin:$PATH
-
-# Autocompletions for govpress-tools
-# shellcheck source=/dev/null
-[[ -f "$HOME/.govpress_zsh_completions.sh" ]] && source "$HOME/.govpress_zsh_completions.sh"
-
-# Autocompletions for pip
-# shellcheck source=/dev/null
-[[ -f "$HOME/.pip_zsh_completions.sh" ]] && source "$HOME/.pip_zsh_completions.sh"
-
-
-GPG_TTY="$(tty)"
-export GPG_TTY
+for RCFILE in ~/.zshrc.d/*
+do
+    source "$RCFILE"
+done
