@@ -192,3 +192,12 @@ for RCFILE in ~/.zshrc.d/*
 do
     source "$RCFILE"
 done
+
+# Source RC file snippets that contain secrets, or anything specific to a machine.
+if [[ -d ~/.zshrc.local.d/ ]]; then
+    # shellcheck source=/dev/null
+    for RCFILE in ~/.zshrc.local.d/*
+    do
+        source "$RCFILE"
+    done
+fi
