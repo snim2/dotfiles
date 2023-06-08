@@ -62,6 +62,9 @@
 #     colorMoved = zebra
 # #    noprefix = true
 
+[diff]
+    wsErrorHighlight = all
+
 [difftool]
     prompt = false
 
