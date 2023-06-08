@@ -41,6 +41,9 @@
     show-branch = true
     status = true
 
+[stash]
+    showPatch = true
+
 [rerere]
     enabled = true
 
