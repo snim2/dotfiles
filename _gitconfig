@@ -176,8 +176,8 @@
     # Undo last commit
     undo = reset HEAD~1 --mixed
 
-    # Rewrite last commit message
-    amend = commit -a --amend
+    # Rewrite last commit
+    amend = commit -a --amend --no-edit
 
     # Get default branch.
     default-branch = !git remote show origin | awk '/HEAD branch/ {print $NF}'
