@@ -23,6 +23,7 @@
 
 [fetch]
     prune = true
+    pruneTags = true
 
 [grep]
     lineNumber = true
