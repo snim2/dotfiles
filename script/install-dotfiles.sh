@@ -23,3 +23,13 @@ do
         echo "$HOME/.${DOTFILE:1} is a symlink"
     fi
 done
+
+# Tmux package manager
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    echo
+    echo "Remember to press PREFIX+I in tmux to install plugins."
+    echo
+else
+    echo "tpm is already installed"
+fi
