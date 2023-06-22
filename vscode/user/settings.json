@@ -34,5 +34,6 @@
     ],
     "cSpell.language": "en-GB",
     "redhat.telemetry.enabled": false,
-    "editor.fontFamily": "'FiraCode Nerd Font Retina', Menlo, Monaco, 'Courier New', monospace"
+    "editor.fontFamily": "'FiraCode Nerd Font Retina', Menlo, Monaco, 'Courier New', monospace",
+    "window.zoomLevel": 1
 }
