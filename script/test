@@ -14,6 +14,6 @@ git ls-files -z -c '*.bash' \
                    '_zshrc.d/*' \
                    '_zsh_completions/*' \
                    'script/*' \
-                   'bin/*' | xargs -0 shellcheck --shell=bash --color=always --external-sources --check-sourced
+                   'bin/*[!validate-ssl]' | xargs -0 shellcheck --shell=bash --color=always --external-sources --check-sourced
 
 echo "Shellcheck: OK."

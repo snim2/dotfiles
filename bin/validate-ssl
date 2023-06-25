@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+"""
+Validate SSL certificate.
+"""
+
+# pylint: disable=C0103
+
+import socket
+import ssl
+import sys
+
+HTTPS_PORT = 443
+
+
+def has_valid_cert(site):
+    """Determine whether site has a valid SSL certificate.
+
+    Return 'OK' string or error message.
+    """
+
+    context = ssl.create_default_context()
+    context.verify_mode = ssl.CERT_REQUIRED
+    context.check_hostname = True
+    sock = context.wrap_socket(socket.socket(), server_hostname=site)
+    try:
+        sock.connect((site, HTTPS_PORT))
+        cert = sock.getpeercert()
+        # pylint: disable=W4902
+        ssl.match_hostname(cert, site)
+    except (socket.error, ssl.CertificateError, ssl.SSLError) as exn:
+        sock.close()
+        return False, str(exn)
+    sock.close()
+    return True, 'OK'
+
+
+def main(site):  # pragma: no cover
+    """Check endpoint for a valid SSL certificate."""
+
+    is_valid, message = has_valid_cert(site)
+    print(site, message)
+    if not is_valid:
+        sys.exit(1)
+
+
+if __name__ == '__main__':  # pragma: no cover
+    main(sys.argv[1])
