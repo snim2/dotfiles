@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#
+# Time the latesncy of a given website.
+#
+# Based on: https://repost.aws/knowledge-center/cloudfront-troubleshoot-latency
+#
+
+MEASUREMENTS=$(curl -w "\nDNS resolution:\t\t%{time_namelookup}\nTCP negotiation:\t%{time_connect}\nSSL negotiation:\t%{time_appconnect}\nTTFB:\t\t\t%{time_starttransfer}\n\nTotal time:\t\t%{time_total} \n" \
+    -o /dev/null \
+    -vsL \
+    $1)
+echo "$MEASUREMENTS"
+
+TTFB=$(echo "$MEASUREMENTS" | grep TTFB | awk '{print $2}')
+if (( $(echo "$TTFB > 0.8" | bc -l) )); then
+    echo
+    echo "TTFB is slow. Aim for < 800ms."
+elif (( $(echo "$TTFB >= 1.8" | bc -l) )); then
+    echo
+    echo "TTFB is extremely poor. Aim for < 800ms."
+fi
