@@ -6,10 +6,23 @@
 
 KEYWORDS=$(cat "${HOME}/data/sql_keywords")
 FILE_CONTENTS=$(strings "$1")
+FILE_CONTENTS_BASE64=$(base64 -i "$1" | strings)
 
+echo "SQL commands in raw file:"
 for word in ${KEYWORDS}
 do
     if echo "${FILE_CONTENTS}" | grep -q "${word}";
+    then
+        echo "${word}"
+    fi
+done
+
+echo
+echo
+echo "SQL commands in base64 encoded file:"
+for word in ${KEYWORDS}
+do
+    if echo "${FILE_CONTENTS_BASE64}" | grep -q "${word}";
     then
         echo "${word}"
     fi
