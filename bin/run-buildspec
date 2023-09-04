@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#
+# Run a given AWS buildspec.yml file locally.
+#
+# Usage:
+#    run-buildspec <path-to-buildspec.yml>
+# e.g.
+#    run-buildspec $PWD/buildspec.yml
+#
+# See:
+#     https://docs.aws.amazon.com/codebuild/latest/userguide/use-codebuild-agent.html
+#
+
+set -e
+
+if [[ $(basename "$1") != "buildspec.yml" ]];
+then
+    echo "Argument should be a path to a buildspec.yml file."
+    exit 1
+fi
+
+BUILDSPEC_DIR=$(dirname "$1")
+ARTIFACT_DIR="$BUILDSPEC_DIR/.artifacts"
+BUILD_IMAGE=public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:4.0
+
+if ! docker image inspect "$BUILD_IMAGE" >/dev/null;
+then
+    echo "===> Downloading build image..."
+    docker pull "$BUILD_IMAGE"
+fi
+
+# public.ecr.aws/codebuild/local-builds:aarch64 is also available.
+if ! docker image inspect public.ecr.aws/codebuild/local-builds:latest >/dev/null;
+then
+    echo "===> Downloading CodeBuild agent..."
+    docker pull public.ecr.aws/codebuild/local-builds:latest
+fi
+
+if ! command -v codebuild_build.sh && [[ ! -f codebuild_build.sh ]];
+then
+    echo "===> Downloading codebuild script..."
+    curl -O https://raw.githubusercontent.com/aws/aws-codebuild-docker-images/master/local_builds/codebuild_build.sh
+    chmod +x codebuild_build.sh
+    if [[ -d "$HOME/bin" ]];
+    then
+        mv codebuild_build.sh "$HOME/bin"
+    fi
+fi
+
+echo "===> Running buildspec.yml..."
+mkdir -p "$ARTIFACT_DIR"
+CMD=$([[ -f codebuild_build.sh ]] && echo "./codebuild_build.sh" || echo "codebuild_build.sh")
+"$CMD" -i "$BUILD_IMAGE" -a "$ARTIFACT_DIR" -s "$BUILDSPEC_DIR"
+
+echo "===> If the build was successful, artifcats will be in $ARTIFACT_DIR"
