@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "Monokai Pro",
     "workbench.colorCustomizations": {
         "[Monokai]": {
             "editorWhitespace.foreground": "#999"
@@ -80,5 +80,9 @@
     "material-icon-theme.opacity": 1,
     "material-icon-theme.saturation": 0.7,
     "editor.fontFamily": "'FiraCode Nerd Font Retina', Menlo, Monaco, 'Courier New', monospace",
-    "window.zoomLevel": 1
+    "workbench.iconTheme": "Monokai Pro Icons",
+    "application.shellEnvironmentResolutionTimeout": 30,
+    "window.zoomLevel": 1,
+    "cSpell.enabled": true,
+    "git.openRepositoryInParentFolders": "always"
 }
