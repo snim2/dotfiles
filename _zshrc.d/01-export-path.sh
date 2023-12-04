@@ -2,4 +2,4 @@
 # Add govpress-tools scripts to path.
 # Add dalmatian-tools scripts to path.
 # Add Sublime Text to path.
-export PATH="$HOME/bin:/Users/snim2/code/github.com/dxw/govpress-tools/bin:/Users/snim2/code/github.com/dxw/dalmatian-tools/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin/:$PATH"
+export PATH="$HOME/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin/:$PATH"
