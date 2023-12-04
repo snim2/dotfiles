@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 # Install extensions.
-xargs -n 1 code --install-extension --force < vscode/extensions.txt
+xargs -n 1 code --install-extension < vscode/extensions.txt
 
 # Where does VSCode keep its config files?
 # See: https://code.visualstudio.com/docs/getstarted/settings#_settingsjson
