@@ -9,7 +9,7 @@
 MEASUREMENTS=$(curl -w "\nDNS resolution:\t\t%{time_namelookup}\nTCP negotiation:\t%{time_connect}\nSSL negotiation:\t%{time_appconnect}\nTTFB:\t\t\t%{time_starttransfer}\n\nTotal time:\t\t%{time_total} \n" \
     -o /dev/null \
     -vsL \
-    $1)
+    "$1")
 echo "$MEASUREMENTS"
 
 TTFB=$(echo "$MEASUREMENTS" | grep TTFB | awk '{print $2}')
