@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#
+# Display a file with visible whitespace, formatted similarly to the "visible
+# whitespace" feature found in Sublime, VSCode, etc.
+#
+# Example usage:
+#
+#     #!/bin/bash¶
+#     ¶
+#     #¶
+#     #·Display·a·file·with·visible·whitespace,·formatted·similarly·to·the·"visible¶
+#     #·whitespace"·feature·found·in·Sublime,·VSCode,·etc.¶
+#     #¶
+#     ¶
+#     sed·'s/·/·/g;s/\t/￫/g;s/\r/§/g;s/$/¶/g'·$1¶
+#
+
+sed 's/ /·/g;s/\t/￫/g;s/\r/§/g;s/$/¶/g' $1
