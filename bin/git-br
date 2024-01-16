@@ -15,6 +15,7 @@ width2=6
 width3=30
 width4=20
 width5=40
+width6=50
 
 count_commits() {
     local branch="$1"
@@ -28,10 +29,10 @@ count_commits() {
 # Main script
 main_branch=$(git rev-parse HEAD)
 
-printf "${GREEN}%-${width1}s ${RED}%-${width2}s ${BLUE}%-${width3}s ${YELLOW}%-${width4}s ${NO_COLOR}%-${width5}s\n" "Ahead" "Behind" "Branch" "Last Commit"  " "
+printf "${GREEN}%-${width1}s ${RED}%-${width2}s ${BLUE}%-${width6}s ${YELLOW}%-${width4}s ${NO_COLOR}%-${width5}s\n" "Ahead" "Behind" "Branch" "Last Commit"  " "
 
 # Separator line for clarity
-printf "${GREEN}%-${width1}s ${RED}%-${width2}s ${BLUE}%-${width3}s ${YELLOW}%-${width4}s ${NO_COLOR}%-${width5}s\n" "-----" "------" "------------------------------" "-------------------" " "
+printf "${GREEN}%-${width1}s ${RED}%-${width2}s ${BLUE}%-${width6}s ${YELLOW}%-${width4}s ${NO_COLOR}%-${width5}s\n" "-----" "------" "------------------------------" "-------------------" " "
 
 format_string="%(objectname:short)@%(refname:short)@%(committerdate:relative)"
 IFS=$'\n'
@@ -47,6 +48,6 @@ do
         ahead_behind=$(count_commits "$sha" "$main_branch")
         ahead=$(echo "$ahead_behind" | cut -f2)
         behind=$(echo "$ahead_behind" | cut -f1)
-        printf "${GREEN}%-${width1}s ${RED}%-${width2}s ${BLUE}%-${width3}s ${YELLOW}%-${width4}s ${NO_COLOR}%-${width5}s\n" $ahead $behind $branch "$time" "$description"
+        printf "${GREEN}%-${width1}s ${RED}%-${width2}s ${BLUE}%-${width6}s ${YELLOW}%-${width4}s ${NO_COLOR}%-${width5}s\n" $ahead $behind $branch "$time" "$description"
     fi
 done
