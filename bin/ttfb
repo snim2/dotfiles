@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#
+# Print time to first byte for a given URL.
+#
+
+curl -w "%{time_starttransfer}\n" \
+    -o /dev/null \
+    -sL \
+    "$1"
