@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# https://unix.stackexchange.com/a/194136
+dig +short myip.opendns.com @resolver4.opendns.com
