@@ -1,0 +1,4 @@
+#!/bin/sh
+
+location=$(curl -s ipinfo.io | jq -r '"\(.city) \(.country)"' | sed 's/ /+/g')
+curl "wttr.in/~$location"
