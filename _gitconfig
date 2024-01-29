@@ -18,6 +18,9 @@
 [status]
     submodulesummary = true
 
+[branch]
+    sort = -committerdate
+
 [commit]
     verbose = false
 
