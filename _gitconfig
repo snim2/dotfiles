@@ -83,6 +83,10 @@
     tool = meld
     conflictstyle = diff3
 
+[maintenance]
+    auto = false
+    strategy = incremental
+
 #
 # Colours
 #
