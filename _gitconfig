@@ -27,6 +27,7 @@
 [fetch]
     prune = true
     pruneTags = true
+    writeCommitGraph = true
 
 [grep]
     lineNumber = true
