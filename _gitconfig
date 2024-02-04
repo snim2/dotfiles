@@ -44,6 +44,9 @@
 [pager]
     show-branch = true
     status = true
+    log = diff-highlight | less
+    show = diff-highlight | less
+    diff = diff-highlight | less
 
 [stash]
     showPatch = true
