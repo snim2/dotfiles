@@ -26,6 +26,7 @@
 
 [commit]
     verbose = false
+    commit = scissors
 
 [fetch]
     prune = true
