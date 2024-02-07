@@ -46,6 +46,7 @@
 [rebase]
     abbreviateCommands = true
     autosquash = true
+    autostash = true
 
 [pager]
     show-branch = true
