@@ -78,6 +78,7 @@
 
 [diff]
     wsErrorHighlight = all
+    conflictStyle = zdiff3
 
 [difftool]
     prompt = false
@@ -87,7 +88,7 @@
 
 [merge]
     tool = meld
-    conflictstyle = diff3
+    conflictStyle = zdiff3
 
 [maintenance]
     auto = false
