@@ -16,7 +16,7 @@
     defaultBranch = main
 
 [help]
-    autocorrect = 1
+    autocorrect = 10
 
 [status]
     submodulesummary = true
