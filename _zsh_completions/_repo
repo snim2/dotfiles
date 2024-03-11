@@ -4,7 +4,7 @@
 # Full paths will look like this:
 #     /Users/snim2/code/github.com/snim2/dotfiles
 _get_repos() {
-    find "$HOME/code" -maxdepth 3 -mindepth 3 -type d -exec basename {} \;
+    find "$HOME/code" -maxdepth 4 -mindepth 3 -type d -exec test -d {}/.git \; -exec basename {} \; -print
 }
 
 _repo() {
