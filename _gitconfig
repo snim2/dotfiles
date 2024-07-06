@@ -36,6 +36,9 @@
 [grep]
     lineNumber = true
 
+[tag]
+    sort = -authordate
+
 [push]
     default = simple
     rebase = true
