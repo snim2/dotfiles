@@ -27,6 +27,7 @@
     "files.trimTrailingWhitespace": true,
     "editor.folding": false,
     "editor.rulers": [ 80, 120 ],
+    "editor.minimap.renderCharacters": false,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintArgs": [
