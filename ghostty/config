@@ -1,0 +1,37 @@
+# Typography
+font-family = "Monaspace Neon Var Regular"
+font-family-bold = "Monaspace Neon Var Regular Bold"
+font-family-italic = "Monaspace Neon Var Regular Italic"
+font-family-bold-italic = "Monaspace Neon Var Regular Bold Italic"
+font-feature = "calt"
+font-feature = "liga"
+font-feature = "ss01"
+font-feature = "ss02"
+font-feature = "ss03"
+font-feature = "ss04"
+font-feature = "ss05"
+font-feature = "ss06"
+font-feature = "ss07"
+font-feature = "ss08"
+font-feature = "ss09"
+font-feature = cv01=1
+
+# Theme and colour schemes
+theme = "Monokai Soda"
+background-opacity = "0.6"
+background-blur-radius = "20"
+bold-is-bright = "true"
+selection-invert-fg-bg = "true"
+
+# Behaviour
+copy-on-select = "true"
+shell-integration = "zsh"
+
+# Quick terminal / guake features
+quick-terminal-position = "top"
+quick-terminal-screen = "main"
+quick-terminal-autohide = "true"
+
+# Keybindings
+keybind = ctrl+space>/=toggle_quick_terminal
+
