@@ -18,7 +18,7 @@ font-feature = cv01=1
 
 # Theme and colour schemes
 theme = "Monokai Soda"
-background-opacity = "0.6"
+background-opacity = "0.8"
 background-blur-radius = "20"
 bold-is-bright = "true"
 selection-invert-fg-bg = "true"
