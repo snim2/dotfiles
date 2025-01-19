@@ -33,5 +33,5 @@ quick-terminal-screen = "main"
 quick-terminal-autohide = "true"
 
 # Keybindings
-keybind = global:ctrl+space=toggle_quick_terminal
+keybind = global:ctrl+escape=toggle_quick_terminal
 
