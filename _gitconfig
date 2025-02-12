@@ -27,7 +27,7 @@
     sort = -committerdate
 
 [commit]
-    verbose = false
+    verbose = true
     commit = scissors
 
 [fetch]
