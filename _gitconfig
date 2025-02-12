@@ -3,6 +3,8 @@
     ignorecase = false
     excludesfile = ~/.gitignore
     hooksPath = ~/code/github.com/erbridge/git-pair/githooks
+    # Highlight whitespace errors in git diff:
+    whitespace = tabwidth=4,cr-at-eol,trailing-space,space-before-tab,indent-with-non-tab
 
 # Anything local to this machine is kept in a separate file.
 # This includes, credentials, authentication, signing, external tools.
