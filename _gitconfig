@@ -33,6 +33,7 @@
 [fetch]
     prune = true
     pruneTags = true
+    all = true
     writeCommitGraph = true
 
 [grep]
