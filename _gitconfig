@@ -55,6 +55,7 @@
     abbreviateCommands = true
     autosquash = true
     autostash = true
+    updateRefs = true
 
 [pager]
     show-branch = true
