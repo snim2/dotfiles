@@ -44,6 +44,8 @@
 [push]
     default = simple
     rebase = true
+    autoSetupRemote = true
+    followTags = true
 
 [pull]
     rebase = merges
