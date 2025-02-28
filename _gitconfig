@@ -39,7 +39,7 @@
     lineNumber = true
 
 [tag]
-    sort = -authordate
+    sort = -version:refname
 
 [push]
     default = simple
