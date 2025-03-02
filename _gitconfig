@@ -91,6 +91,11 @@
 [diff]
     wsErrorHighlight = all
     conflictStyle = zdiff3
+    renames = true
+    ui = always
+    colorMoved = zebra
+    mnemonicPrefix = true
+    interactive = always
 
 [difftool]
     prompt = false
