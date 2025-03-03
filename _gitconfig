@@ -12,7 +12,7 @@
     path = .gitconfig_local
 
 [html]
-    followRedirects = true
+    followRedirects = initial
 
 [init]
     defaultBranch = main
