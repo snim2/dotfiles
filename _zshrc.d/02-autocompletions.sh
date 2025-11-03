@@ -6,7 +6,7 @@ source "$(brew --prefix)/etc/bash_completion.d/adr-tools"
 
 # php-version configuration: https://github.com/wilmoore/php-version
 # shellcheck source=/dev/null
-source "$(brew --prefix php-version)/php-version.sh" && php-version 7.4
+source "$(brew --prefix php-version)/php-version.sh" && php-version 8.2
 
 # Autocompletions for govpress-tools
 # shellcheck source=/dev/null
