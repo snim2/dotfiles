@@ -6,9 +6,9 @@
 # See: https://stackoverflow.com/questions/42635253/display-received-cert-with-curl
 #
 
-function seecert () {
+function getcert () {
   nslookup $1
   (openssl s_client -showcerts -servername $1 -connect $1:443 <<< "Q" | openssl x509 -text | grep -iA2 "Validity")
 }
 
-seecert $1
+getcert $1
