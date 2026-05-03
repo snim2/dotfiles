@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -euo pipefail
+
+OUT="${1:-output.png}"
+SIZE="${2:-1280,2000}"
+URL="${3:-https://example.com}"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+else
+  CHROME="$(command -v chrome || command -v google-chrome || command -v chromium || true)"
+fi
+
+if [[ -z "${CHROME:-}" || ! -x "$CHROME" ]]; then
+  echo "Chrome/Chromium not found"
+  exit 1
+fi
+
+"$CHROME" \
+  --headless=new \
+  --disable-gpu \
+  --hide-scrollbars \
+  --window-size="$SIZE" \
+  --virtual-time-budget=5000 \
+  --run-all-compositor-stages-before-draw \
+  --screenshot="$OUT" \
+  "$URL"
