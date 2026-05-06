@@ -137,7 +137,7 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#333")
 
-;; Highlight trailing whitespace and tabs.
+;; Highlight trailing whitespaceand tabs.
 (use-package highlight-chars
   :ensure t
   :config
