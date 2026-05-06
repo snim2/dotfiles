@@ -132,8 +132,17 @@
   (set-frame-font "Source Code Pro-12"))
 
 (setq font-lock-maximum-decoration t)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'monokai t)
+
+(use-package monokai-theme
+  :ensure t
+  :config
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (load-theme 'monokai t))))
+    (load-theme 'monokai t)))
+
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#333")
 
