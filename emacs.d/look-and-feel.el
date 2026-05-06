@@ -68,10 +68,12 @@
 ;; Fix scrolling.
 (setq scroll-preserve-screen-position t)
 
-;; Mouse scroll in terminal mode.
+;; Mouse/trackpad scroll in terminal mode.
 (xterm-mouse-mode 1)
-(global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
-(global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3)))
+(global-set-key (kbd "<mouse-4>")   (lambda () (interactive) (scroll-down 3)))
+(global-set-key (kbd "<mouse-5>")   (lambda () (interactive) (scroll-up 3)))
+(global-set-key (kbd "<wheel-up>")   (lambda () (interactive) (scroll-down 3)))
+(global-set-key (kbd "<wheel-down>") (lambda () (interactive) (scroll-up 3)))
 
 ;; Smooth scrolling in GUI mode (Emacs 29+).
 (when (fboundp 'pixel-scroll-precision-mode)
