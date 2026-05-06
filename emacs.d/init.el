@@ -40,9 +40,18 @@
 
 ;;; Core display settings — set early so they survive any subfile errors.
 (setq-default display-line-numbers t)
+(setq-default fill-column 80)
 (global-display-line-numbers-mode 1)
 (global-display-fill-column-indicator-mode 1)
-(setq-default fill-column 80)
+
+;;; Re-apply after desktop restore and after each new emacsclient frame.
+(defun snim2-apply-display-settings (&optional frame)
+  (let ((f (or frame (selected-frame))))
+    (with-selected-frame f
+      (setq-default display-line-numbers t)
+      (global-display-line-numbers-mode 1))))
+(add-hook 'after-make-frame-functions #'snim2-apply-display-settings)
+(add-hook 'desktop-after-read-hook #'snim2-apply-display-settings)
 
 ;;; Say no to condescension.
 (put 'narrow-to-page 'disabled nil)
