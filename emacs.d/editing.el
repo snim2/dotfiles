@@ -37,6 +37,22 @@
   (local-set-key [f5] 'org-latex-export-to-pdf))
 (add-hook 'org-mode-hook 'snim2-org)
 
+;;; Markdown.
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)
+         ("README\\(?:\\.md\\)?\\'" . gfm-mode))
+  :init
+  (setq markdown-command
+        (or (executable-find "multimarkdown")
+            (executable-find "pandoc")
+            (executable-find "markdown")
+            "markdown"))
+  :hook
+  (markdown-mode . flyspell-mode)
+  (markdown-mode . auto-fill-mode))
+
 
 ;; Trailing whitespace.
 (setq show-trailing-whitespace t)
