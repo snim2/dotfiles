@@ -148,6 +148,24 @@
 ;;;; Configuration for all programming related major modes.                ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Display Greek letter names as Unicode characters in programming modes.
+(defun pretty-greek ()
+  (let ((greek '(("alpha" . "α") ("beta" . "β") ("gamma" . "γ")
+                 ("delta" . "δ") ("epsilon" . "ε") ("zeta" . "ζ")
+                 ("eta" . "η") ("theta" . "θ") ("iota" . "ι")
+                 ("kappa" . "κ") ("lambda" . "λ") ("mu" . "μ")
+                 ("nu" . "ν") ("xi" . "ξ") ("omicron" . "ο")
+                 ("pi" . "π") ("rho" . "ρ") ("sigma_final" . "ς")
+                 ("sigma" . "σ") ("tau" . "τ") ("upsilon" . "υ")
+                 ("phi" . "φ") ("chi" . "χ") ("psi" . "ψ")
+                 ("omega" . "ω"))))
+    (cl-loop for (word . char) in greek
+             do (font-lock-add-keywords nil
+                  `((,(concat "\\(?:^\\|[^a-zA-Z0-9]\\)\\(" word "\\)[^a-zA-Z]")
+                     (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                               ,char)
+                               nil))))))))
+
 ;; Tab-completion for programming modes.
 (defun indent-or-expand (arg)
   "Either indent or expand, depending on context."

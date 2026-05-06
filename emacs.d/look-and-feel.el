@@ -133,41 +133,22 @@
 
 (setq font-lock-maximum-decoration t)
 
-(use-package monokai-theme
-  :ensure t
-  :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (load-theme 'monokai t))))
-    (load-theme 'monokai t)))
+;; monokai-theme has no (provide ...) so use-package can't require it.
+;; Install and load it directly.
+(unless (package-installed-p 'monokai-theme)
+  (package-install 'monokai-theme))
+(when-let ((f (locate-library "monokai-theme")))
+  (add-to-list 'custom-theme-load-path (file-name-directory f)))
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (load-theme 'monokai t))))
+  (load-theme 'monokai t))
 
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#333")
 
-;; Highlight trailing whitespaceand tabs.
-(use-package highlight-chars
-  :ensure t
-  :config
-  (hc-toggle-highlight-trailing-whitespace t)
-  (hc-toggle-highlight-tabs t))
+;; Delete trailing whitespace on save (whitespace-mode shows it visually).
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;;; Display Greek letter names as Unicode characters in programming modes.
-(defun pretty-greek ()
-  (let ((greek '(("alpha" . "α") ("beta" . "β") ("gamma" . "γ")
-                 ("delta" . "δ") ("epsilon" . "ε") ("zeta" . "ζ")
-                 ("eta" . "η") ("theta" . "θ") ("iota" . "ι")
-                 ("kappa" . "κ") ("lambda" . "λ") ("mu" . "μ")
-                 ("nu" . "ν") ("xi" . "ξ") ("omicron" . "ο")
-                 ("pi" . "π") ("rho" . "ρ") ("sigma_final" . "ς")
-                 ("sigma" . "σ") ("tau" . "τ") ("upsilon" . "υ")
-                 ("phi" . "φ") ("chi" . "χ") ("psi" . "ψ")
-                 ("omega" . "ω"))))
-    (cl-loop for (word . char) in greek
-             do (font-lock-add-keywords nil
-                  `((,(concat "\\(?:^\\|[^a-zA-Z0-9]\\)\\(" word "\\)[^a-zA-Z]")
-                     (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                               ,char)
-                               nil))))))))

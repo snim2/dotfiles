@@ -39,6 +39,14 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+;;; Regenerate autoloads for any package that was installed without them.
+(dolist (pkg-dir (directory-files package-user-dir t "\\`[^.]"))
+  (when (file-directory-p pkg-dir)
+    (let* ((pkg-name (replace-regexp-in-string "-[0-9].*$" "" (file-name-nondirectory pkg-dir)))
+           (autoloads-file (expand-file-name (concat pkg-name "-autoloads.el") pkg-dir)))
+      (unless (file-exists-p autoloads-file)
+        (package-generate-autoloads pkg-name pkg-dir)))))
+
 ;;; use-package is built into Emacs 29.
 (require 'use-package)
 (setq use-package-always-ensure t)
