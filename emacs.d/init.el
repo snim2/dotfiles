@@ -38,6 +38,11 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;;; Core display settings — set early so they survive any subfile errors.
+(global-display-line-numbers-mode 1)
+(global-display-fill-column-indicator-mode 1)
+(setq-default fill-column 80)
+
 ;;; Say no to condescension.
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
