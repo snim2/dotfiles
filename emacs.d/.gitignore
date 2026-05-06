@@ -1,0 +1,21 @@
+# Private data - contains credentials, do not commit.
+private.el
+
+# Compiled Elisp.
+*.elc
+
+# ELPA package directory - managed by the package system, not version controlled.
+elpa/
+
+# Runtime / session files.
+auto-save-list/
+.emacs.desktop
+places
+history
+tramp
+
+# Emacs backup and autosave files.
+*~
+%backup%~
+\#*\#
+.#*
