@@ -21,6 +21,11 @@
 
 (message "Loading custom Emacs configuration.")
 
+;;; Point Custom at its own file so it never writes to init.el.
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 (require 'cl-lib)
 
 ;;; Sort out load-path.
