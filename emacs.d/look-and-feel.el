@@ -48,6 +48,10 @@
 (setq indicate-empty-lines t)
 (setq-default indent-tabs-mode nil)
 
+;; Visible whitespace: show tabs and trailing spaces, not every space.
+(setq whitespace-style '(face tabs tab-mark trailing empty))
+(global-whitespace-mode 1)
+
 ;; Use highlighting for search and replace.
 (setq search-highlight t
       query-replace-highlight t)
