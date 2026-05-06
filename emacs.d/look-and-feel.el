@@ -127,9 +127,17 @@
 ;;;; Configuration for fonts and syntax highlighting.                      ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use Source Code Pro if available.
-(when (and window-system (find-font (font-spec :name "Source Code Pro")))
-  (set-frame-font "Source Code Pro-12"))
+;; Set font — works in both direct and daemon (emacsclient) mode.
+(defun snim2-set-font (&optional frame)
+  (with-selected-frame (or frame (selected-frame))
+    (cond
+     ((find-font (font-spec :name "Monaspace Neon Var"))
+      (set-frame-font "Monaspace Neon Var-12"))
+     ((find-font (font-spec :name "Source Code Pro"))
+      (set-frame-font "Source Code Pro-12")))))
+(if (daemonp)
+    (add-hook 'after-make-frame-functions #'snim2-set-font)
+  (when window-system (snim2-set-font)))
 
 (setq font-lock-maximum-decoration t)
 
