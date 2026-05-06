@@ -38,6 +38,7 @@
 ;; fill-column-indicator package is no longer needed.
 (setq-default fill-column 80)
 (global-display-fill-column-indicator-mode 1)
+(set-face-attribute 'fill-column-indicator nil :foreground "#555555" :background 'unspecified)
 
 ;; Line numbers in all buffers.
 (global-display-line-numbers-mode 1)
@@ -66,6 +67,15 @@
 
 ;; Fix scrolling.
 (setq scroll-preserve-screen-position t)
+
+;; Mouse scroll in terminal mode.
+(xterm-mouse-mode 1)
+(global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
+(global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3)))
+
+;; Smooth scrolling in GUI mode (Emacs 29+).
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode 1))
 
 ;; Turn that sodding bell off.
 (setq ring-bell-function 'ignore)
