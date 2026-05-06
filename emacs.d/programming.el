@@ -175,7 +175,6 @@
 (defun my-prog-config ()
   "Set minor modes and other config for all programming related modes."
   (abbrev-mode 1)
-  (display-line-numbers-mode 1)
   (pretty-greek)
   (hilite-todos)
   (when (fboundp 'git-gutter-mode)

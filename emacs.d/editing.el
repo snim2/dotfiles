@@ -31,7 +31,6 @@
 
 ;;; org-mode additions.
 (defun snim2-org ()
-  (display-line-numbers-mode 1)
   (flyspell-mode 1)
   (auto-fill-mode 1)
   (local-set-key [f5] 'org-latex-export-to-pdf))

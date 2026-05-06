@@ -39,6 +39,9 @@
 (setq-default fill-column 80)
 (global-display-fill-column-indicator-mode 1)
 
+;; Line numbers in all buffers.
+(global-display-line-numbers-mode 1)
+
 ;; Indentation.
 (setq tab-width 4)
 (setq indicate-empty-lines t)
