@@ -48,18 +48,20 @@
 (use-package go-mode
   :ensure t)
 
-;; pomodoro timer (local copy).
-(when (require 'pomodoro nil t)
-  (pomodoro-add-to-mode-line))
+(use-package pomodoro
+  :ensure t
+  :config
+  (when (fboundp 'pomodoro-add-to-mode-line)
+    (pomodoro-add-to-mode-line)))
+
+(use-package php-mode
+  :ensure t)
 
 ;; Assembler mode (local copy).
 (autoload 'gas-mode "gas-mode" "Edit assembler" t)
 
 ;; OTT semantics mode (local copy).
 (autoload 'ott-mode "ott-mode" "Edit semantics" t)
-
-;; PHP mode (local copy).
-(autoload 'php-mode "php-mode" "Edit PHP" t)
 
 ;; TableGen mode (local copy).
 (autoload 'tablegen-mode "tablegen-mode" "Quickly create tables" t)

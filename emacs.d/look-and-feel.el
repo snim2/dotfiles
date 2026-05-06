@@ -118,8 +118,10 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#333")
 
-;; Highlight trailing whitespace and tabs (from local highlight-chars.el).
-(when (require 'highlight-chars nil t)
+;; Highlight trailing whitespace and tabs.
+(use-package highlight-chars
+  :ensure t
+  :config
   (hc-toggle-highlight-trailing-whitespace t)
   (hc-toggle-highlight-tabs t))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
