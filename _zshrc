@@ -201,3 +201,7 @@ if [[ -d ~/.zshrc.local.d/ ]]; then
         source "$RCFILE"
     done
 fi
+# Autocompletions for govpress-tools
+# shellcheck source=/dev/null
+source "$HOME"/.govpress_zsh_completions.sh
+export PATH="$HOME/.local/bin:$PATH"
