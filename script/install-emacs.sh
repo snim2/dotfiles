@@ -10,14 +10,14 @@ if [[ ! -L "$HOME/.emacs.d" || ! -e "$HOME/.emacs.d" ]]; then
     rm -rf "$HOME/.emacs.d"
     ln -s "${TOP_LEVEL_DIR}/emacs.d" "$HOME/.emacs.d"
 else
-    echo "~/.emacs.d is already a symlink"
+    echo "$HOME/.emacs.d is already a symlink"
 fi
 
 # Copy private.el template if no private.el exists yet.
 if [[ ! -f "$HOME/.emacs.d/private.el" ]]; then
     echo "Copying private.el.template -> ~/.emacs.d/private.el"
     cp "${TOP_LEVEL_DIR}/emacs.d/private.el.template" "$HOME/.emacs.d/private.el"
-    echo "Edit ~/.emacs.d/private.el to add your personal settings."
+    echo "Edit $HOME/.emacs.d/private.el to add your personal settings."
 fi
 
 # Start the Emacs server via Homebrew services.
