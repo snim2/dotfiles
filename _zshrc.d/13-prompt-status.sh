@@ -19,8 +19,10 @@ _prompt_set_rprompt() {
     local dur_str
     dur_str=$(printf '%.1fs' "${_PROMPT_DURATION:-0}")
     if (( code == 0 )); then
+        # shellcheck disable=SC2034
         RPROMPT="%F{green}${code}%f (${dur_str})"
     else
+        # shellcheck disable=SC2034
         RPROMPT="%F{red}${code}%f (${dur_str})"
     fi
 }
