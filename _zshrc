@@ -28,6 +28,22 @@ else
     fi
 fi
 
+# `brew shellenv` marks FPATH as exported. Once exported, every child shell
+# inherits a frozen fpath array that still points at the zsh-version-specific
+# functions dir (e.g. .../Cellar/zsh/5.9/share/zsh/functions) computed by the
+# first shell. After `brew upgrade` bumps zsh, that dir is gone, so children can
+# no longer autoload is-at-least, add-zsh-hook, compinit, bashcompinit, etc.
+#
+# Homebrew keeps $HOMEBREW_PREFIX/share/zsh/functions as version-independent
+# symlinks that always point at the running zsh, so prepend it to repair a
+# stale inherited fpath. Then un-export FPATH so the staleness can't propagate
+# to further children, and keep the array unique so it can't grow without bound.
+if [[ -n "$HOMEBREW_PREFIX" && -d "$HOMEBREW_PREFIX/share/zsh/functions" ]]; then
+    fpath=("$HOMEBREW_PREFIX/share/zsh/functions" $fpath)
+fi
+typeset -U fpath
+typeset +x FPATH
+
 HISTFILE=$HOME/.histfile
 HISTSIZE=999999999
 # shellcheck disable=SC2034
