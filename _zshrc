@@ -39,7 +39,7 @@ fi
 # stale inherited fpath. Then un-export FPATH so the staleness can't propagate
 # to further children, and keep the array unique so it can't grow without bound.
 if [[ -n "$HOMEBREW_PREFIX" && -d "$HOMEBREW_PREFIX/share/zsh/functions" ]]; then
-    fpath=("$HOMEBREW_PREFIX/share/zsh/functions" $fpath)
+    fpath=("$HOMEBREW_PREFIX/share/zsh/functions" "$fpath")
 fi
 typeset -U fpath
 typeset +x FPATH
